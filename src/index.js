@@ -1,15 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+
 import './index.css';
 import App from './App';
 import ButtonAppBar from './navbar/nav'
+import Financial from './financial/finanacial'
+import Food from './food/food'
 import * as serviceWorker from './serviceWorker';
 
+
+
+
 ReactDOM.render(
+  <Router>
   <React.StrictMode>
     <ButtonAppBar/>
-    <App />
+  <Route exact path="/" component={App} />    
+  <Route path="/financial" component={Financial} />
+  <Route path="/food" component={Food} />
   </React.StrictMode>,
+  </Router>,
   document.getElementById('root')
 );
 
