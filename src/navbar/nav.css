@@ -6,5 +6,10 @@
     flex-grow: 1;
 }
 .MuiDrawer-paperAnchorLeft {
-    margin-top: 6.5vh
+    width: 30vw;
+}
+@media (hover: none){
+    .MuiDrawer-paperAnchorLeft {
+        width: 50vw;
+    }
 }
