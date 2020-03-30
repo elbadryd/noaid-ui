@@ -35,9 +35,18 @@
   }
 }
 .MuiTableContainer-root{
-  margin: 10%;
+  margin-top: 5%;
+  margin-left: 10%;
   width: 80%!important;
 }
 .MuiTableCell-head{
   font-weight: bold!important;
+}
+@media (hover:none){
+  .MuiTable-root, .MuiTableCell-root, .MuiTableCell-head{
+    font-size: .75em!important;
+    padding: 1%!important;
+    line-height: 1rem!important;
+    min-width: 13vw!important;
+  }
 }

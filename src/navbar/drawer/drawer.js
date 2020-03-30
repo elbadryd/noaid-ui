@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -72,7 +72,7 @@ export default function TemporaryDrawer(props) {
         {['Contact'].map((text) => (
           <ListItem button key={text}>
             <ListItemIcon><Contacts/></ListItemIcon>
-            <ListItemText  primary={text} />
+            <a href="mailto:elbadry.d@gmail.com">Contact</a>
           </ListItem>
         ))}
       </List>
