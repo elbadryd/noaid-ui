@@ -1,7 +1,5 @@
 import React from 'react';
-import axios from 'axios';
 import sheetConfigs from '../sheetConfigs.json'
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,23 +9,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Tabletop from 'tabletop';
 
-
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-// const rows = [
-
-// ];
-
-// const classes = useStyles();
 class Food extends React.Component {
     constructor(props){
         super(props);
@@ -40,42 +21,34 @@ class Food extends React.Component {
 
    componentDidMount(){
        const sheetId= sheetConfigs['food']
-       const sheeturl = `https://spreadsheets.google.com/feeds/cells/${sheetId}/1/public/values?alt=json`
       Tabletop.init( { key: sheetId,
         callback: this.showInfo,
         simpleSheet: false } )
-      // axios.get(sheeturl)
-      // .then(res=> {
-      //   console.log(res)
-      //   let headers = res.data.feed.entry.filter(cell=>cell.gs$cell.row === '1').map(obj=>obj.gs$cell.$t)
-      //   console.log(headers)
-      //   this.setState({doc:res})
-      // })
-      // .catch(err=>console.log(err));
-      // console.log(rows)
-
-
     }
 
-    showInfo(data, tabletop) {
+    showInfo(data) {
       console.log(data)
       const { Sheet1 } = data;
       this.setState({
         rows: Sheet1.elements,
         cols: Sheet1.columnNames
       })
-      // do something with the data
-      // console.log(JSON.stringify(data, null, 2))
+
     }
 
-    useStyles = makeStyles({
-      table: {
-        minWidth: 650,
-      },
-    });
+    detectNumberOrUrl(text){
+      const urlre = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g
+      const phonere = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/g
+      if (urlre.test(text)){
+        return <a href={"//"+text}>{text}</a>
+      }
+      if (phonere.test(text)){
+        return <a href={"tel:"+text}>{text}</a>
+      } 
+      return text
+    }
 
     render() {
-      //  const classes = this.useStyles();
 
       const { rows, cols } = this.state
       return (
@@ -93,7 +66,7 @@ class Food extends React.Component {
             {rows.map((row, i) => (
               <TableRow key={row[i]}>
                 {cols.map((col, i)=>(
-                  <TableCell>{row[col]}</TableCell>
+                  <TableCell>{this.detectNumberOrUrl(row[col])}</TableCell>
               ))}
               </TableRow>
             ))}

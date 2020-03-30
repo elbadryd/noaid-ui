@@ -45,7 +45,7 @@ class App extends React.Component {
 
   }
   formatDate(num){
-    return new Date(1000*this.state.LAStats.Date).toString()
+    return new Date(this.state.LAStats.Date).toString()
   }
   render(){
     const {LAStats, NOStats} = this.state
@@ -60,7 +60,7 @@ class App extends React.Component {
         <br/>
         COVID-19 Cases in New Orleans: {NOStats? NOStats.Cases : null}
         <br></br>
-        Updated at: {NOStats? this.formatDate(NOStats.Date): null}
+        Updated at: {NOStats? this.formatDate(LAStats.Date): null}
       </div>
     );
 

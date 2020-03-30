@@ -34,3 +34,10 @@
     transform: rotate(360deg);
   }
 }
+.MuiTableContainer-root{
+  margin: 10%;
+  width: 80%!important;
+}
+.MuiTableCell-head{
+  font-weight: bold!important;
+}
