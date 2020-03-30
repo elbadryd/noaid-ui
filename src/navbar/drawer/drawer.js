@@ -11,6 +11,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { Work, Kitchen, AttachMoney, ThumbUp, Info, Home, Contacts} from '@material-ui/icons';
+// import KitchenIcon
 
 const useStyles = makeStyles({
   list: {
@@ -38,6 +40,14 @@ export default function TemporaryDrawer(props) {
     setState({ ...state, [anchor]: open });
   };
 
+  
+  const icons ={
+    Jobs: <Work/>,
+    Food: <Kitchen/>,
+    Financial: <AttachMoney/>,
+    'Requests - Offers': <ThumbUp/>,
+    Unemployment: <Info/>,
+  }
   const list = anchor => (
     <div
       className={classes.list}
@@ -47,20 +57,21 @@ export default function TemporaryDrawer(props) {
     >
       <List>
       <ListItem button>
+            <ListItemIcon><Home/></ListItemIcon>
             <Link to="/">Home</Link>
     </ListItem>
-        {['Financial', 'Food', 'Jobs', 'Unemployment', 'Requests - Offers'].map((text, index) => (
+        {Object.keys(icons).map((text, index) => (
           <ListItem onClick={props.toggleDrawer}  button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemIcon>{icons[text]}</ListItemIcon>
             <Link to={text}>{text}</Link>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['Contact'].map((text, index) => (
+        {['Contact'].map((text) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemIcon><Contacts/></ListItemIcon>
             <ListItemText  primary={text} />
           </ListItem>
         ))}

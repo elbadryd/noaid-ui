@@ -7,6 +7,7 @@
 }
 .MuiDrawer-paperAnchorLeft {
     width: 30vw;
+    overflow: hidden;
 }
 @media (hover: none){
     .MuiDrawer-paperAnchorLeft {
