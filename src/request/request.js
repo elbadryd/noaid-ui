@@ -9,12 +9,14 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Tabletop from 'tabletop';
 
-class Food extends React.Component {
+class Request extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          rows: [{}],
-          cols: [],
+        requestRows: [{}],
+        requestCols: [],
+        offerRows: [{}],
+        offerCols: []
         }
         this.showInfo = this.showInfo.bind(this)
     }
@@ -28,10 +30,12 @@ class Food extends React.Component {
 
     showInfo(data) {
       console.log(data)
-      const { Food } = data;
+      const { Requests, Offers } = data;
       this.setState({
-        rows: Food.elements,
-        cols: Food.columnNames
+        requestRows: Requests.elements,
+        requestCols: Requests.columnNames,
+        offerRows: Offers.elements,
+        offerCols: Offers.columnNames
       })
 
     }
@@ -50,30 +54,51 @@ class Food extends React.Component {
 
     render() {
 
-      const { rows, cols } = this.state
+      const { requestRows, requestCols, offerCols, offerRows } = this.state;
       return (
-        
+      <div>
         <TableContainer component={Paper}>
         <Table  aria-label="simple table">
           <TableHead>
             <TableRow>
-              {cols.map(col=>(
+              {requestCols.map(col=>(
                 <TableCell>{col}</TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
+            {requestRows.map((row, i) => (
               <TableRow key={row[i]}>
-                {cols.map((col, i)=>(
+                {requestCols.map((col, i)=>(
                   <TableCell>{this.detectNumberOrUrl(row[col])}</TableCell>
               ))}
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+        </TableContainer>
+        <TableContainer component={Paper}>
+<Table  aria-label="simple table">
+  <TableHead>
+    <TableRow>
+      {offerCols.map(col=>(
+        <TableCell>{col}</TableCell>
+      ))}
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    {offerRows.map((row, i) => (
+      <TableRow key={row[i]}>
+        {offerCols.map((col, i)=>(
+          <TableCell>{this.detectNumberOrUrl(row[col])}</TableCell>
+      ))}
+      </TableRow>
+    ))}
+  </TableBody>
+</Table>
+</TableContainer>
+</div>
       );
   }
 }
-export default Food
+export default Request

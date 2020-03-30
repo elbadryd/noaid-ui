@@ -6,6 +6,8 @@ import App from './App';
 import ButtonAppBar from './navbar/nav'
 import Financial from './financial/finanacial'
 import Food from './food/food'
+import Request from './request/request'
+import Job from './job/job'
 import * as serviceWorker from './serviceWorker';
 
 
@@ -17,6 +19,8 @@ ReactDOM.render(
   <Route exact path="/" component={App} />    
   <Route path="/financial" component={Financial} />
   <Route path="/food" component={Food} />
+  <Route path="/Requests - Offers" component={Request} />
+  <Route path="/jobs" component={Job} />
   </Router>,
   document.getElementById('root')
 );

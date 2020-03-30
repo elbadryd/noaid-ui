@@ -49,7 +49,7 @@ export default function TemporaryDrawer(props) {
       <ListItem button>
             <Link to="/">Home</Link>
     </ListItem>
-        {['Financial', 'Food', 'Jobs', 'Unemployment', 'Requests', 'Offers'].map((text, index) => (
+        {['Financial', 'Food', 'Jobs', 'Unemployment', 'Requests - Offers'].map((text, index) => (
           <ListItem onClick={props.toggleDrawer}  button key={text}>
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <Link to={text}>{text}</Link>

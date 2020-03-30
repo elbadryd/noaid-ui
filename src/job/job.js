@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Tabletop from 'tabletop';
 
-class Food extends React.Component {
+class Job extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -28,10 +28,10 @@ class Food extends React.Component {
 
     showInfo(data) {
       console.log(data)
-      const { Food } = data;
+      const { Jobs } = data;
       this.setState({
-        rows: Food.elements,
-        cols: Food.columnNames
+        rows: Jobs.elements,
+        cols: Jobs.columnNames
       })
 
     }
@@ -76,4 +76,4 @@ class Food extends React.Component {
       );
   }
 }
-export default Food
+export default Job

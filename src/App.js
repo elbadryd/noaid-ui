@@ -55,8 +55,6 @@ class App extends React.Component {
         
         </header>
         COVID-19 Cases in Louisiana: {LAStats? LAStats.Cases : null}
-        {/* <br></br>
-        Updated at: {LAStats? this.formatDate(LAStats.Date): null} */}
         <br/>
         COVID-19 Cases in New Orleans: {NOStats? NOStats.Cases : null}
         <br></br>
