@@ -1,8 +1,9 @@
 import React from 'react';
-import sheetConfigs from '../sheetConfigs.json'
+import config from '../config.json'
 import Tabletop from 'tabletop';
-import SheetTable from '../sheetTable/sheettable'
+import SheetTable from '../sheetTable/sheettable';
 import axios from 'axios';
+import './jobs.css'
 
 class Job extends React.Component {
     constructor(props){
@@ -10,15 +11,19 @@ class Job extends React.Component {
         this.state = {
           rows: [{}],
           cols: [],
+          workNolaJobs: null,
         }
         this.showInfo = this.showInfo.bind(this)
     }
 
    componentDidMount(){
-       const sheetId= sheetConfigs['master']
+       const sheetId= config['sheetUrl']
       Tabletop.init( { key: sheetId,
         callback: this.showInfo,
         simpleSheet: false } )
+        axios.get(config['azureUrl'] + '/scrapetrigger')
+            .then(res=>this.setState({workNolaJobs: res.data}))
+            .catch(err=>console.log(err))
     }
 
     showInfo(data) {
@@ -32,9 +37,12 @@ class Job extends React.Component {
 
     render() {
 
-      const { rows, cols } = this.state
+      const { rows, cols, workNolaJobs } = this.state
       return (
-        <SheetTable rows={rows} cols={cols}/>
+          <div>
+            <SheetTable rows={rows} cols={cols}/>
+            <div className="workNolaJobs" dangerouslySetInnerHTML={{ __html: workNolaJobs }} />
+        </div>
       );
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import sheetConfigs from '../sheetConfigs.json'
+import config from '../config.json'
 import SheetTable from '../sheetTable/sheettable'
 import Tabletop from 'tabletop';
 
@@ -16,7 +16,7 @@ class Request extends React.Component {
     }
 
    componentDidMount(){
-       const sheetId= sheetConfigs['master']
+       const sheetId= config['sheetUrl']
       Tabletop.init( { key: sheetId,
         callback: this.showInfo,
         simpleSheet: false } )
